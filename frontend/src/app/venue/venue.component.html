@@ -1,0 +1,61 @@
+<div>
+<div class="container d-flex flex-sm-row flex-column justify-content-around" style="padding-top: 50px;">
+  <div class="container text-center">
+    <h4 style="color:aquamarine;">Name</h4>
+    <p>{{ venueDetailContent.name }}</p>
+
+    <h4 style="color:aquamarine;">Address</h4>
+    <p>{{ venueDetailContent.Address }}, {{ venueDetailContent.City }}</p>
+
+    <h4 style="color:aquamarine;" *ngIf="venueDetailContent.PhoneNumber">Phone Number</h4>
+    <p>{{ venueDetailContent.PhoneNumber }}</p>
+  </div>
+  <div class="container text-center" *ngIf="venueDetailContent.OpenHours">
+    <div *ngIf="venueDetailContent.OpenHours">
+    <h4 style="color:aquamarine;">Open Hours</h4>
+    <p style="overflow:hidden" [class.heightReduce]="show[0]">{{ venueDetailContent.OpenHours }}</p>
+    <span type="button" (click)="showtoggle(0)" style="color:rgb(6, 127, 241); text-decoration: underline">
+      {{ show[0] ? 'Read More': 'Read Less' }}
+    </span>
+    <span class="material-icons">
+      {{show[0] ? 'expand_more':"expand_less"}}
+      </span>
+    </div>
+
+    <div *ngIf="venueDetailContent.GeneralRule">
+    <h4 style="color:aquamarine;">General Rule</h4>
+    <p style="overflow:hidden" [class.heightReduce]="show[1]">{{ venueDetailContent.GeneralRule }}</p>
+    <span type="button" (click)="showtoggle(1)" style="color:rgb(6, 127, 241); text-decoration: underline">
+      {{ show[1] ? 'Read More': 'Read Less' }}
+    </span>
+    <span class="material-icons">
+      {{show[1] ? 'expand_more':"expand_less"}}
+      </span>
+    </div>
+
+    <div *ngIf="venueDetailContent.ChildRule">
+    <h4 style="color:aquamarine;">Child Rule</h4>
+    <p style="overflow:hidden" [class.heightReduce]="show[2]">{{ venueDetailContent.ChildRule }}</p>
+    <span type="button" (click)="showtoggle(2)" style="color:rgb(6, 127, 241); text-decoration: underline">
+      {{ show[2] ? 'Read More': 'Read Less' }}
+    </span>
+    <span class="material-icons">
+      {{show[2] ? 'expand_more':"expand_less"}}
+      </span>
+    </div>
+  </div>
+</div>
+<div class="container text-center" style="margin-top: 200px;">
+  <button type="button" class="btn btn-danger" (click)="showmap()" >Show venue on Google map</button>
+</div>
+<div *ngIf="map" class="container-sm position-absolute" style="top: 0px; background-color: white;">
+  <h3 style="color: black;">Event Venue</h3>
+  <hr>
+  <div class="container-sm d-flex flex-column align-items-center">
+  <google-map height="500px" width="100%" [options]="mapOptions" style="width: 100%;">
+    <map-marker [position]="venueDetailContent.position"></map-marker>
+  </google-map>
+  </div>
+  <button type="button" class="btn btn-dark" (click)="closemap()">Close</button>
+</div>
+</div>

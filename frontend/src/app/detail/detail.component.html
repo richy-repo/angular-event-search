@@ -1,0 +1,33 @@
+<div class = "container d-flex flex-sm-row flex-column justify-content-around">
+  <div class="text-sm-left text-center">
+      <h2>Date</h2>
+      <p>{{event_content.Time}}</p>
+      <h2 *ngIf="event_content.ArtistTeam!=''">Artist/Team</h2>
+      <p>{{event_content.ArtistTeam}}</p>
+      <h2 *ngIf="event_content.Venue != ''">Venue</h2>
+      <p>{{event_content.Venue}}</p>
+      <h2>Genres</h2>
+      <p>
+        {{event_content.genres}}
+      </p>
+      <h2 *ngIf="event_content.PriceRange != ''">Price Ranges</h2>
+      <p>{{event_content.PriceRange}}</p>
+      <h2>Ticket Status</h2>
+      <p><button class="btn" [class]="event_content.statusColor" type="button">{{event_content.TicketStatus}}</button></p>
+      <h2>Buy Ticket At</h2>
+      <p><a href="{{event_content.BuyTicketAt}}" target="_blank" style="text-decoration:none; color: rgb(38, 131, 193);">ticketmaster</a></p>
+  </div>
+  <div>
+    <img width=100% src="{{event_content.SeatMap}}">
+  </div>
+</div>
+<div class="container text-center">
+Share on: 
+<a href="https://twitter.com/intent/tweet?text=check {{event_content.Name}} on Ticketmaster {{event_content.BuyTicketAt}}&hashtags=hashtag1,hashtag2" target="_blank">
+  <img src="./assets/twitter.png" style="width: 40px; height: 40px;">
+</a>
+<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{event_content.BuyTicketAt}}&amp;src=sdkpreparse">
+  <img src="./assets/facebook.png" style="width: 40px; height: 40px;">
+</a>
+</div>
+

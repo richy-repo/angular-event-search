@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-image: url("./assets/background.jpg");
+    background-size : cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position: center;
+}
+
+.div1 {
+  max-width: 600px;
+  padding: 20px;
+  background-color:rgba(173, 170, 170, 0.3);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+p {
+  color: white;
+}
+
+.detail_div {
+  background-color:rgba(173, 170, 170, 0.3);
+  backdrop-filter: blur(20px);
+  padding: 0;
+}
+
+#noRecords {
+  background-color: white;
+  text-align : center;
+  color: red;
+}
+
+table, th, td {
+  text-align: center;
+}
+
+h2 {
+  color: aquamarine;
+}
+
+.heightReduce {
+  height: 50px;
+}
+
+
+.formWord{
+    color: rgb(121,155,168);
+}
+
+.title{
+    text-align: center;
+    color:white;
+    font-size:30px;
+    margin-top: -10px;
+}
+  
+.div_buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+  
+a:link{color:black}
+a:visited{color:black}
+a:active{color:grey}
+a:hover{cursor: pointer;}

@@ -1,0 +1,36 @@
+<div *ngIf="favoriteList.length==0" class="container alert alert-light text-center text-danger" style="width: 80%;">
+  No favorite events to show
+</div>
+<div *ngIf="favoriteList.length!=0" class="container text-center table-responsive">
+<h2>List of your favorite events</h2>
+<table class="table table-hover bg-white" style="padding: 0; border-radius: 30px;">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Event</th>
+        <th>Category</th>
+        <th>Venue Info</th>
+        <th>Favorite</th>
+      </tr>
+  </thead>
+  <tbody *ngFor="let item of favoriteList; let i = index">
+    <tr>
+      <td>{{ i+1 }}</td>  <!-- Index starts from 1 -->
+      <td class="text-nowrap">{{ item.date }}</td>
+      <td>
+          {{ item.Name }}
+      </td>
+      <td>
+        {{ item.genres }}
+      </td>
+      <td>{{ item.Venue }}</td>
+      <td>
+        <a (click)="deleteFavorite(i)">
+            <span class="material-icons">delete</span>                    
+        </a>
+      </td>
+    </tr>
+  </tbody>
+  </table>
+</div>

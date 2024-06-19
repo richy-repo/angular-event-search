@@ -1,0 +1,99 @@
+<div class="container div1">
+  <h1 class="title">Events Search</h1>
+  <hr>
+  <form id="form">
+    <div class="form-group">
+      <label for="keyword" class="formWord">Keyword</label>
+      <input type="text" id="keyword" class="form-control" [(ngModel)]="formInfo.keyword"
+      name="keyword" required aria-label="Number"
+      matInput
+      [formControl]="keywordControl"
+      [matAutocomplete]="auto">
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+          <label for="distance" class="formWord">Distance (miles)</label>
+          <input class="form-control" type="number" id="distance" [(ngModel)]="formInfo.distance" placeholder="10" name="dis">
+      </div>
+      <div class="col-md-6">
+        <label for="category" class="formWord">Category</label>
+        <select class="form-control" id="category" [(ngModel)]="formInfo.category" name="cat">
+          <option value="Default">Default</option>
+          <option value="Music">Music</option>
+          <option value="Sports">Sports</option>
+          <option value="Arts">Arts</option>
+          <option value="Theatre">Theatre</option>
+          <option value="Film">Film</option>
+          <option value="Miscellaneous">Miscellaneous</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group" id="location_div">
+      <br>
+      <label for="location" class="formWord">Location</label>
+      <input type="text" id="location" class="form-control" [(ngModel)]="formInfo.fromLocation" 
+      [readonly]="formInfo.from" required name="locat">
+    </div>
+    <div class="form-check formWord">
+      <input  class="form-check-input" type="checkbox" id="auto_location" [(ngModel)]="formInfo.from" name="loca">
+      <label class="form-check-label" for="auto_location">
+        Auto-Detect Location
+      </label>
+    </div>
+    <div class="div_buttons">
+      <button class="btn btn-danger" type="button" (click)="search();" onclick="document.getElementById('form').reportValidity()">SUBMIT</button>
+      <button class="btn btn-primary" type="button" (click)="clearAll()">CLEAR</button>
+    </div>
+  </form> 
+
+</div> 
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of options" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+  <div *ngIf="norecord" class="container alert alert-light text-center text-danger" style="width: 80%;">
+    No results available
+  </div>
+  <div *ngIf="eventsContent.length!=0 && !showDetail" class="container table-responsive" style="padding: 0;">
+  <table class="table table-striped table-dark" id="resultTable">
+      <thead>
+        <tr><th>Date/Time</th><th>Icon</th><th>Event</th><th>Genre</th><th>Venue</th></tr>
+      </thead>
+      <tbody *ngFor="let item of eventsContent; let i = index">
+        <tr [class.bg-dark]="i%2 == 0" [class.bg-secondary]="i%2 != 0" (click)="displayDetail(i)">
+        <th scope="row">{{item.dates.start.localDate}}<br>{{item.dates.start.localTime}}</th>
+        <td><img class="img-fluid" style="max-height: 150px; aspect-ratio: 1 / 1;" src="{{item.images[0].url}}"></td>
+        <td>{{item.name}}</td>
+        <td>{{item.classifications[0].segment.name}}</td>
+        <td>{{item._embedded.venues[0].name}}</td>
+        </tr>
+      </tbody>
+  </table> 
+</div>
+
+<div *ngIf= "selectedEvent && showDetail" class="container detail_div">
+    <div>
+      <!-- Go back to list button -->
+      <button type="button" class="btn btn-default text-light" (click)="back()">
+        <span class="material-icons">
+          arrow_back
+          </span><u>Back</u>
+      </button>
+    </div>
+    <div class="text-center">
+    <h1 id = "name" class="d-inline" style="color:white; text-align: center;">{{selectedEvent.name}}</h1>
+    <button type="button" class="btn btn-light btn-sm rounded-circle" [class.bg-danger]="isFavorite" style="aspect-ratio: 1;" (click)="alertme()">
+      <span class="material-icons">
+        favorite_border
+        </span>
+    </button>
+    </div>
+    <mat-tab-group class="text-white" backgroundColor = "accent">
+        <mat-tab label="Events"> <app-detail [event_content] = "detailContent"></app-detail></mat-tab>
+        <mat-tab label="Artist/Teams"> 
+          <app-artist [artists]="artists"></app-artist>
+        </mat-tab>
+        <mat-tab label="Venue"><app-venue [venueDetailContent]="venueDetailContent"></app-venue></mat-tab>
+    </mat-tab-group>
+</div>
