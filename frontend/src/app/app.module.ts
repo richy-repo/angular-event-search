@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { SearchComponent } from './search/search.component';
@@ -17,6 +17,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { GoogleMapsModule } from '@angular/google-maps'
 
+
+const routes: Routes = [
+    {path: '', component: SearchComponent},
+    {path: 'favorite', component: FavoriteComponent},
+  ]
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,10 +34,7 @@ import { GoogleMapsModule } from '@angular/google-maps'
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([
-      {path: '', component: SearchComponent},
-      {path: 'favorite', component: FavoriteComponent},
-    ]),
+    RouterModule.forRoot(routes),
     MatTabsModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
